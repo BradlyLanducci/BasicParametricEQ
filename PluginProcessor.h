@@ -63,6 +63,12 @@ public:
     Filters filterL;
     Filters filterR;
 
+    Filters filterL2;
+    Filters filterR2;
+
+    Filters filterL3;
+    Filters filterR3;
+
 private:
     juce::AudioProcessorValueTreeState::ParameterLayout createParameters();
 
@@ -71,6 +77,14 @@ private:
     float cutoffFreq1 = 0.f;
     float qualityFactor1 = 0.f;
     float gain1 = 0.f;
+
+    float cutoffFreq2 = 0.f;
+    float qualityFactor2 = 0.f;
+    float gain2 = 0.f;
+
+    float cutoffFreq3 = 0.f;
+    float qualityFactor3 = 0.f;
+    float gain3 = 0.f;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicParametricEQAudioProcessor)

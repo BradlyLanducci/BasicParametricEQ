@@ -55,6 +55,48 @@ public:
         b2 = 1.f - (alphaQ * A);
     }
 
+    void setLPCoefficients(float _cutoffFreq,
+        float _qualityFactor)
+    {
+        cutoffFreq = _cutoffFreq;
+        qualityFactor = _qualityFactor;
+
+        w0 = (2.f * M_PI * cutoffFreq) / s_rate;
+        sn = sin(w0);
+        cs = cos(w0);
+
+        alphaQ = sn / (2.0 * qualityFactor);
+
+        a0 = 1.f + alphaQ;
+        a1 = -2.f * cs;
+        a2 = 1.f - alphaQ;
+
+        b0 = (1.f - cs) / 2.f;
+        b1 = 1.f - cs;
+        b2 = (1.f - cs) / 2.f;
+    }
+
+    void setHPCoefficients(float _cutoffFreq,
+        float _qualityFactor)
+    {
+        cutoffFreq = _cutoffFreq;
+        qualityFactor = _qualityFactor;
+
+        w0 = (2.f * M_PI * cutoffFreq) / s_rate;
+        sn = sin(w0);
+        cs = cos(w0);
+
+        alphaQ = sn / (2.0 * qualityFactor);
+
+        a0 = 1.f + alphaQ;
+        a1 = -2.f * cs;
+        a2 = 1.f - alphaQ;
+
+        b0 = (1.f + cs) / 2.f;
+        b1 = -1.f * (1.f + cs);
+        b2 = (1.f + cs) / 2.f;
+    }
+
     float processSample(float in)
     {
         float out = 0.f;

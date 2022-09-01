@@ -38,6 +38,31 @@ private:
     juce::Slider peaking_1GainSlider;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> peaking_1GainAttachment;
 
+
+
+
+    juce::Slider peaking_2Slider;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> peaking_2Attachment;
+                                                                                  
+    juce::Slider peaking_2QSlider;                                                
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> peaking_2QAttachment;
+                                                                                  
+    juce::Slider peaking_2GainSlider;                                             
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> peaking_2GainAttachment;
+
+
+
+
+    juce::Slider peaking_3Slider;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> peaking_3Attachment;
+
+    juce::Slider peaking_3QSlider;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> peaking_3QAttachment;
+
+    juce::Slider peaking_3GainSlider;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> peaking_3GainAttachment;
+
+
     BasicParametricEQAudioProcessor& audioProcessor;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicParametricEQAudioProcessorEditor)

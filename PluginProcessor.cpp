@@ -141,9 +141,29 @@ void BasicParametricEQAudioProcessor::updateFilter()
     gain1 = apvts.getRawParameterValue("gain1")->load();
 
     filterL.setSampleRate(s_rate);
-    filterL.setPeakingCoefficients(cutoffFreq1, qualityFactor1, gain1);
+    filterL.setHPCoefficients(cutoffFreq1, qualityFactor1);
     filterR.setSampleRate(s_rate);
-    filterR.setPeakingCoefficients(cutoffFreq1, qualityFactor1, gain1);
+    filterR.setHPCoefficients(cutoffFreq1, qualityFactor1);
+
+
+    cutoffFreq2 = apvts.getRawParameterValue("cutoffFreq2")->load();
+    qualityFactor2 = apvts.getRawParameterValue("q2")->load();
+    gain2 = apvts.getRawParameterValue("gain2")->load();
+
+    filterL2.setSampleRate(s_rate);
+    filterL2.setPeakingCoefficients(cutoffFreq2, qualityFactor2, gain2);
+    filterR2.setSampleRate(s_rate);
+    filterR2.setPeakingCoefficients(cutoffFreq2, qualityFactor2, gain2);
+
+
+    cutoffFreq3 = apvts.getRawParameterValue("cutoffFreq3")->load();
+    qualityFactor3 = apvts.getRawParameterValue("q3")->load();
+    gain3 = apvts.getRawParameterValue("gain3")->load();
+
+    filterL3.setSampleRate(s_rate);
+    filterL3.setLPCoefficients(cutoffFreq3, qualityFactor3);
+    filterR3.setSampleRate(s_rate);
+    filterR3.setLPCoefficients(cutoffFreq3, qualityFactor3);
 }
 
 void BasicParametricEQAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
@@ -164,6 +184,12 @@ void BasicParametricEQAudioProcessor::processBlock (juce::AudioBuffer<float>& bu
 
         channelL[sample] = filterL.processSample(channelL[sample]);
         channelR[sample] = filterR.processSample(channelR[sample]);
+
+        channelL[sample] = filterL2.processSample(channelL[sample]);
+        channelR[sample] = filterR2.processSample(channelR[sample]);
+
+        channelL[sample] = filterL3.processSample(channelL[sample]);
+        channelR[sample] = filterR3.processSample(channelR[sample]);
     }
 }
 
@@ -197,12 +223,20 @@ juce::AudioProcessorValueTreeState::ParameterLayout BasicParametricEQAudioProces
 
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
 
-    auto normRange = juce::NormalisableRange<float>(80.f, 18000.0f);
+    auto normRange = juce::NormalisableRange<float>(20.f, 20000.0f);
     normRange.setSkewForCentre(500.f);
 
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("cutoffFreq1", "CutoffFreq1", normRange, 500.0f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("q1", "Q1", 0.5f, 5.0f, (5.0 - 0.5f) / 2.f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("gain1", "Gain1", 5.0f, 50.0f, 5.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("cutoffFreq1", "CutoffFreq1", normRange, 3266.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("q1", "Q1", 0.5f, 12.f, (12.f - 0.5f) / 2.f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("gain1", "Gain1", -40.f, 40.0f, 0.f));
+
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("cutoffFreq2", "CutoffFreq2", normRange, 3266.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("q2", "Q2", 0.5f, 12.f, (12.f - 0.5f) / 2.f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("gain2", "Gain2", -40.f, 40.0f, 0.f));
+
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("cutoffFreq3", "CutoffFreq3", normRange, 3266.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("q3", "Q3", 0.5f, 12.f, (12.f - 0.5f) / 2.f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("gain3", "Gain3", -40.f, 40.0f, 0.f));
 
     return { params.begin(), params.end() };
 }

@@ -35,7 +35,58 @@ BasicParametricEQAudioProcessorEditor::BasicParametricEQAudioProcessorEditor (Ba
     peaking_1GainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "gain1", peaking_1GainSlider);
 
 
-    setSize (1000, 1000);
+
+
+
+
+    peaking_2Slider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    peaking_2Slider.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::NoTextBox, true, 100, 100);
+    peaking_2Slider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::yellow);
+    addAndMakeVisible(peaking_2Slider);
+
+    peaking_2Attachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "cutoffFreq2", peaking_2Slider);
+
+    peaking_2QSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    peaking_2QSlider.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::NoTextBox, true, 100, 100);
+    peaking_2QSlider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::yellow);
+    addAndMakeVisible(peaking_2QSlider);
+
+    peaking_2QAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "q2", peaking_2QSlider);
+
+    peaking_2GainSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    peaking_2GainSlider.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::NoTextBox, true, 100, 100);
+    peaking_2GainSlider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::yellow);
+    addAndMakeVisible(peaking_2GainSlider);
+
+    peaking_2GainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "gain2", peaking_2GainSlider);
+
+
+
+
+
+    peaking_3Slider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    peaking_3Slider.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::NoTextBox, true, 100, 100);
+    peaking_3Slider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::purple);
+    addAndMakeVisible(peaking_3Slider);
+
+    peaking_3Attachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "cutoffFreq3", peaking_3Slider);
+
+    peaking_3QSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    peaking_3QSlider.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::NoTextBox, true, 100, 100);
+    peaking_3QSlider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::purple);
+    addAndMakeVisible(peaking_3QSlider);
+
+    peaking_3QAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "q3", peaking_3QSlider);
+
+    peaking_3GainSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    peaking_3GainSlider.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::NoTextBox, true, 100, 100);
+    peaking_3GainSlider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::purple);
+    addAndMakeVisible(peaking_3GainSlider);
+
+    peaking_3GainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "gain3", peaking_3GainSlider);
+
+
+    setSize (500, 500);
 }
 
 BasicParametricEQAudioProcessorEditor::~BasicParametricEQAudioProcessorEditor()
@@ -56,9 +107,17 @@ void BasicParametricEQAudioProcessorEditor::paint (juce::Graphics& g)
     g.setFont(75.f);
     g.drawText("Basic EQ", getLocalBounds(), juce::Justification::centredTop);
 
-    peaking_1Slider.setBounds({ 450, 450, 100, 100 });
-    peaking_1QSlider.setBounds({ 450, 575, 100, 100 });
-    peaking_1GainSlider.setBounds({ 450, 700, 100, 100 });
+    peaking_1Slider.setBounds({ 75, 100, 100, 100 });
+    peaking_1QSlider.setBounds({ 75, 225, 100, 100 });
+    peaking_1GainSlider.setBounds({ 75, 350, 100, 100 });
+
+    peaking_2Slider.setBounds({ 200, 100, 100, 100 });
+    peaking_2QSlider.setBounds({ 200, 225, 100, 100 });
+    peaking_2GainSlider.setBounds({ 200, 350, 100, 100 });
+
+    peaking_3Slider.setBounds({ 325, 100, 100, 100 });
+    peaking_3QSlider.setBounds({ 325, 225, 100, 100 });
+    peaking_3GainSlider.setBounds({ 325, 350, 100, 100 });
 }
 
 void BasicParametricEQAudioProcessorEditor::resized()
